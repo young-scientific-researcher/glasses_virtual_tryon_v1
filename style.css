@@ -1,0 +1,304 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  height: 100vh;
+}
+
+#controls {
+  overflow-y: auto;
+  background: rgba(12, 18, 27, 0.96);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 18px;
+  scrollbar-width: thin;
+}
+
+#controls h1 {
+  margin: 0 0 18px;
+  font-size: 22px;
+}
+
+.panel-block {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.compact-note {
+  background: rgba(61, 103, 188, 0.14);
+}
+
+.label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #9dc1ff;
+  margin-bottom: 10px;
+}
+
+.button-group,
+.inline-row,
+.button-grid,
+.two-cols,
+.frame-selector {
+  display: flex;
+  gap: 8px;
+}
+.frame-empty {
+  color: white;
+  opacity: 0.8;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.button-group.wrap,
+.frame-selector {
+  flex-wrap: wrap;
+}
+
+.two-cols > div {
+  flex: 1;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.button-grid .wide {
+  grid-column: 1 / -1;
+}
+
+button,
+input,
+.file-btn,
+.frame-chip {
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+button,
+.file-btn,
+.frame-chip {
+  cursor: pointer;
+}
+
+button:hover,
+.file-btn:hover,
+.frame-chip:hover {
+  background: rgba(255,255,255,0.14);
+}
+
+button.active,
+.frame-chip.active {
+  background: #2f6fff;
+  border-color: #2f6fff;
+}
+
+input {
+  width: 100%;
+}
+
+.file-btn input {
+  display: none;
+}
+
+.small-note {
+  margin-bottom: 8px;
+  color: #b8bfd0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.measurements-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+#stage {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+video,
+#overlay2d,
+#threeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+video {
+  opacity: 0.96;
+  transform: scaleX(-1);
+}
+
+#overlay2d,
+#threeCanvas {
+  pointer-events: none;
+}
+
+#overlay2d {
+  z-index: 4;
+}
+
+#threeCanvas {
+  z-index: 5;
+}
+
+#status {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.7);
+  color: lime;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: center;
+}
+
+.instruction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  padding: 20px 24px;
+  border-radius: 14px;
+  text-align: center;
+  transition: opacity .8s;
+  line-height: 1.5;
+}
+
+.debug-panel {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  width: 280px;
+  max-width: calc(100% - 28px);
+  background: rgba(0,0,0,0.72);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mobile-controls-toggle {
+  display: none;
+}
+
+.frame-selector {
+  max-height: 180px;
+  overflow: auto;
+}
+
+.frame-chip {
+  text-align: left;
+}
+
+.stack-mobile {
+  flex-wrap: wrap;
+}
+
+code {
+  color: #b9d4ff;
+}
+
+@media (max-width: 1024px) {
+  #app {
+    grid-template-columns: 1fr;
+  }
+
+  #controls {
+    position: absolute;
+    z-index: 30;
+    top: 10px;
+    left: 10px;
+    width: min(360px, calc(100% - 20px));
+    max-height: calc(100vh - 20px);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+  }
+}
+
+@media (max-width: 768px) {
+  #controls {
+    display: none;
+  }
+
+  #controls.open {
+    display: block;
+  }
+
+  .debug-panel {
+    display: none;
+  }
+
+  .mobile-controls-toggle {
+    display: block;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 35;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.65);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  #status {
+    font-size: 11px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .instruction {
+    width: calc(100% - 40px);
+    padding: 16px 18px;
+  }
+
+  .frame-selector {
+    max-height: none;
+  }
+}

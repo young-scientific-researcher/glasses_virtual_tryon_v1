@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Glasses Try-On</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="app">
+    <aside id="controls">
+      <h1>👓 Virtual Try-On</h1>
+
+      <section class="panel-block compact-note">
+        <div class="label">Конфиденциальность</div>
+        <div class="small-note">
+          Видео с камеры обрабатывается локально в браузере. На сервер ничего не отправляется.
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Режим</div>
+        <div class="button-group wrap">
+          <button id="mode3d" class="active">3D OBJ</button>
+          <button id="mode2d">PNG</button>
+          <button id="modeMeasure">Измерение</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Каталог оправ</div>
+        <div id="frameSelector" class="frame-selector"></div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Калибровка</div>
+        <div class="button-group wrap">
+          <button id="calibPD" class="active">По PD</button>
+          <button id="calibIris">По радужке</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">PD пользователя</div>
+        <div class="inline-row">
+          <input id="pdInput" type="number" value="63" step="0.5" min="50" max="80" />
+          <button id="pdInputBtn">Установить</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Диаметр радужки (мм)</div>
+        <div class="inline-row">
+          <input id="irisInput" type="number" value="11.8" step="0.1" min="10.5" max="13" />
+          <button id="irisInputBtn">Установить</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Ширина PNG оправы (мм)</div>
+        <div class="inline-row">
+          <input id="frameWidthInput" type="number" value="140" step="1" min="110" max="170" />
+          <button id="frameWidthBtn">Установить</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Смещение PNG (px)</div>
+        <div class="inline-row two-cols">
+          <div>
+            <span>X</span>
+            <input id="pngOffsetX" type="number" value="0" step="1" />
+          </div>
+          <div>
+            <span>Y</span>
+            <input id="pngOffsetY" type="number" value="0" step="1" />
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Пользовательские файлы</div>
+        <div class="small-note">Можно быстро протестировать свои PNG и OBJ поверх каталога.</div>
+        <div class="inline-row stack-mobile">
+          <label class="file-btn">
+            Загрузить PNG
+            <input id="pngUpload" type="file" accept="image/png,image/webp,image/jpeg" />
+          </label>
+          <label class="file-btn">
+            Загрузить OBJ
+            <input id="objUpload" type="file" accept=".obj" />
+          </label>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="label">Ручная подстройка 3D</div>
+        <div class="button-grid">
+          <button id="rotXPlus">X+</button>
+          <button id="rotXMinus">X-</button>
+          <button id="rotYPlus">Y+</button>
+          <button id="rotYMinus">Y-</button>
+          <button id="rotZPlus">Z+</button>
+          <button id="rotZMinus">Z-</button>
+          <button id="resetRot" class="wide">Сброс углов</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <div class="button-group wrap">
+          <button id="toggleOcclusion">Обрезка: Вкл</button>
+          <button id="captureBtn">Скриншот</button>
+        </div>
+      </section>
+
+      <section class="panel-block measurements-list">
+        <div class="label">Онлайн измерения</div>
+        <div><span>IPD:</span> <strong id="mIpd">—</strong></div>
+        <div><span>Ширина лица:</span> <strong id="mFaceWidth">—</strong></div>
+        <div><span>Ширина переносицы:</span> <strong id="mBridge">—</strong></div>
+        <div><span>Расстояние до камеры:</span> <strong id="mDistance">—</strong></div>
+        <div><span>px / mm:</span> <strong id="mPxPerMm">—</strong></div>
+      </section>
+    </aside>
+
+    <main id="stage">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="overlay2d"></canvas>
+      <canvas id="threeCanvas"></canvas>
+
+      <div id="instruction" class="instruction">
+        🎥 Разрешите доступ к камере<br />
+        и посмотрите прямо в объектив
+      </div>
+
+      <div id="status">🟡 Инициализация...</div>
+      <div class="debug-panel" id="debugPanel">Ориентация: загрузка...</div>
+      <button id="mobileControlsToggle" class="mobile-controls-toggle">⚙️</button>
+    </main>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

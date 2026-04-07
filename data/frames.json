@@ -1,0 +1,79 @@
+[
+  {
+    "id": "classic_black",
+    "name": "Classic Black",
+    "type": "obj",
+    "objUrl": "./assets/models/frame_angle_10.obj",
+    "frameWidthMM": 140,
+    "fitOffsetX": 0,
+    "fitOffsetY": -8,
+    "fitOffsetZ": -420,
+    "pngOffsetX": 0,
+    "pngOffsetY": 0,
+    "scaleDivisor3D": 100,
+    "material": {
+      "mode": "color",
+      "color": "#111111",
+      "metalness": 0.2,
+      "roughness": 0.6
+    }
+  },
+  {
+    "id": "classic_tortoise",
+    "name": "Classic Tortoise",
+    "type": "obj",
+    "objUrl": "./assets/models/frame_angle_10.obj",
+    "frameWidthMM": 140,
+    "fitOffsetX": 0,
+    "fitOffsetY": -8,
+    "fitOffsetZ": -360,
+    "pngOffsetX": 0,
+    "pngOffsetY": 0,
+    "scaleDivisor3D": 100,
+    "material": {
+      "mode": "texture",
+      "textureUrl": "./assets/textures/tortoise.jpg",
+      "metalness": 0.15,
+      "roughness": 0.75
+    }
+  },
+  {
+    "id": "classic_wo",
+    "name": "Classic wo",
+    "type": "obj",
+    "objUrl": "./assets/models/frame_wo.obj",
+    "frameWidthMM": 140,
+    "fitOffsetX": 0,
+    "fitOffsetY": 0,
+    "fitOffsetZ": -420,
+    "pngOffsetX": 0,
+    "pngOffsetY": 0,
+    "scaleDivisor3D": 100,
+    "material": {
+      "mode": "texture",
+      "textureUrl": "./assets/textures/tortoise.jpg",
+      "metalness": 0.15,
+      "roughness": 0.75
+    }
+  },
+  {
+    "id": "classic_png",
+    "name": "Classic PNG",
+    "type": "png",
+    "enabled": true,
+    "pngUrl": "./assets/images/pad_center.png",
+    "frameWidthMM": 140,
+    "fitOffsetX": -5,
+    "fitOffsetY": 8,
+    "fitOffsetZ": -400,
+    "pngOffsetX": 0,
+    "pngOffsetY": 0,
+    "scaleDivisor3D": 200,
+    "material": {
+      "mode": "color",
+      "color": "#111111",
+      "metalness": 0.2,
+      "roughness": 0.6
+    }
+  }
+]
